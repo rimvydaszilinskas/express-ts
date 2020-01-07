@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "typescript",
+    "password": "password",
+    "database": "typescript",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "typescript",
+    "password": "password",
+    "database": "typescript",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "typescript",
+    "password": "password",
+    "database": "typescript",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
