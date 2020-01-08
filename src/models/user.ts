@@ -1,14 +1,22 @@
-import { Sequelize, Model, DataType, DataTypes } from 'sequelize';
+import { Sequelize, Model, DataType, DataTypes, InitOptions } from 'sequelize';
+import bcryptjs from 'bcryptjs';
 
-export default class User extends Model {
+class User extends Model {
     public id!: number;
     public firstName?: string;
     public lastName?: string;
     public username!: string;
+    public password!: string;
 
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
+
+    verifyPassword(password: string) {
+        return bcryptjs.compareSync(password, this.password)
+    };
 }
+
+export default User;
 
 export function initUser(SequelizeInstance: Sequelize) {
     User.init({
@@ -28,9 +36,18 @@ export function initUser(SequelizeInstance: Sequelize) {
         username: {
             type: DataTypes.STRING(128),
             allowNull: false
+        },
+        password: {
+            type: DataTypes.STRING(256),
+            allowNull: false
         }
     }, {
         tableName: 'users',
-        sequelize: SequelizeInstance
+        sequelize: SequelizeInstance,
+        hooks: {
+            beforeCreate: (user: User) => {
+                user.password = bcryptjs.hashSync(user.password, bcryptjs.genSaltSync(10))
+            }
+        }
     });
 };

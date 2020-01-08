@@ -6,6 +6,12 @@
         "rootDir": "./src",
         "strict": true,
         "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitAny": false,
+        "sourceMap": true,
+        "typeRoots": [
+            "./src/typings/index.d.ts", 
+            "./node_modules/@types"
+        ],
     }
 }
