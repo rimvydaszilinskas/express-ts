@@ -1,11 +1,16 @@
-import express, { Application, Request, Response, NextFunction, raw } from 'express';
+import dotenv from 'dotenv';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import nunjucks from 'nunjucks'; 
 import bodyParser from 'body-parser';
 import session from 'express-session';
 
+import HttpException from './exceptions/HttpException';
 import Router from './router/index';
 import Sequelize from './models';
 import Passport from './config/passport';
+
+// Setup using .env file to set environmental variables
+dotenv.config();
 
 Sequelize.authenticate().then(() => {
     console.log('Connection to database established successfully');
@@ -43,6 +48,12 @@ nunjucks.configure('templates', {
 
 // Use router to handle requests
 app.use('/', Router);
+
+app.use((err: HttpException, req: Request, res: Response, next: NextFunction) => {
+    // TODO handle errors here
+    console.log(err);
+    res.send('Error');
+});
 
 app.listen(5000, () => {
     console.log('Server is listening to port 5000')
