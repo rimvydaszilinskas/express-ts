@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/app.js",
-    "dev": "nodemon src/app.ts",
+    "dev": "nodemon --watch templates -e js,json,html,ts --watch src src/app.ts ",
     "build": "tsc -p"
   },
   "author": "",

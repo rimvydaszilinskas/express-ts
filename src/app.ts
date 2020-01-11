@@ -25,11 +25,13 @@ app.use(session({
     saveUninitialized: true
 }));
 
+// Setup to use passport for authentication
 app.use(Passport.initialize());
 app.use(Passport.session());
 
 app.use((req: Request, res: Response, next:NextFunction) => {
-    console.log('Hello world');
+    // Log requests
+    console.log(`${req.method} ${req.originalUrl} User: ${req.user}`);
     next();
 });
 

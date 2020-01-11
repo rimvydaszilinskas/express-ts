@@ -46,6 +46,7 @@ export function initUser(SequelizeInstance: Sequelize) {
         sequelize: SequelizeInstance,
         hooks: {
             beforeCreate: (user: User) => {
+                // Hash the password before at creation
                 user.password = bcryptjs.hashSync(user.password, bcryptjs.genSaltSync(10))
             }
         }
