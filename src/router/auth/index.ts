@@ -21,7 +21,7 @@ router.route('/login')
             return res.redirect(next);
         }
 
-        res.send('ok');
+        res.json(req.user);
     });
 
 router.route('/register')

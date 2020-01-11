@@ -9,7 +9,8 @@ router.use('/auth', AuthenticationRouter);
 router.use('/api', APIRouter);
 
 router.get('/', LoginRequired, (req: Request, res: Response) => {
-    res.send('Ok')
+    console.log(req.user);
+    res.json(req.user)
 });
 
 export default router;

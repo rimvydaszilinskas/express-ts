@@ -31,8 +31,15 @@ Passport.serializeUser((user: User, cb) => {
 });
 
 Passport.deserializeUser((obj: number, cb) => {
-    User.findByPk(obj, {raw: true}).then((user) => {
-        return cb(null, user?.username);
+    // Only return the following attributes
+    let attributes: string[] = [
+        'username',
+        'firstName',
+        'lastName'
+    ];
+
+    User.findByPk(obj, {raw: true, attributes: attributes}).then((user) => {
+        return cb(null, user);
     });
 });
 
